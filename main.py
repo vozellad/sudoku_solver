@@ -12,8 +12,6 @@
     def remove_candidate(self, candidate):
         if candidate in self.candidates:
             self.candidates.remove(candidate)
-        else:
-            print(f"Candidate {candidate} not found.")
 
 
 class Board:
