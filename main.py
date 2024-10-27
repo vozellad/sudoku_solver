@@ -15,11 +15,18 @@
 
 
 class Board:
-    def __init__(self):
+    def __init__(self, init_nums: str):
+        if len(init_nums) != 81:
+            raise ValueError('init_nums isn\'t 81 characters.')
+
         self.board = [[None] * 9 for _ in range(9)]
         for row in range(9):
             for col in range(9):
-                self.board[row][col] = Cell()
+                curr_num = init_nums[row * 9 + col]
+                if curr_num == ' ':
+                    self.board[row][col] = Cell()
+                else:
+                    self.board[row][col] = Cell(curr_num)
 
     def add_cell_num(self, row, col, cell_num):
         self.board[row][col].number = cell_num
@@ -87,15 +94,8 @@ class Board:
 
 
 def main():
-    board = Board()
-    init_nums = [
-        (0, 2, 1), (0, 6, 5), (1, 6, 4), (2, 2, 6), (2, 4, 8), (2, 7, 1),
-        (2, 8, 3), (3, 0, 9), (3, 8, 4), (4, 5, 3), (4, 7, 6), (5, 0, 8),
-        (5, 2, 7), (5, 5, 1), (6, 1, 4), (6, 2, 2), (6, 5, 7), (6, 6, 6),
-        (6, 8, 1), (7, 3, 5), (7, 5, 2), (8, 3, 4), (8, 4, 1), (8, 8, 7)
-    ]
-    for row, col, num in init_nums:
-        board.add_cell_num(row, col, num)
+    init_nums = "  1   5        4    6 8  139       4     3 6 8 7  1    42  76 1   5 2      41   7"
+    board = Board(init_nums)
 
     # go through methods of finding cell numbers until the board is completed
     while True:
