@@ -67,7 +67,8 @@ class Board:
                     continue
 
                 if cell.candidates == []:
-                    [cell.add_candidate(n) for n in range(1, 10)]
+                    for n in range(1, 10):
+                        cell.add_candidate(n)
 
                 self.check_cell_row(row, col, cell)
                 self.check_cell_col(row, col, cell)
