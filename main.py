@@ -79,6 +79,12 @@ class Board:
                 if curr_num is not None:
                     cell.remove_candidate(curr_num)
 
+    def apply_mono_candidates(self):
+        for b in self.board:
+            for cell in b:
+                if cell.number is None and len(cell.candidates) == 1:
+                    cell.number = cell.candidates[0]
+
 
 def main():
     board = Board()
@@ -91,12 +97,14 @@ def main():
     for row, col, num in init_nums:
         board.add_cell_num(row, col, num)
 
-    board.output()
-
     # go through methods of finding cell numbers until the board is completed
     while True:
         board.find_candidates()
         print()
+        board.apply_mono_candidates()
+
+        board.output()
+        break
 
 
 main()
