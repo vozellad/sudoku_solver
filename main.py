@@ -41,7 +41,8 @@ class Board:
                 if cell.number is not None:
                     continue
 
-                [cell.add_candidate(n) for n in range(1, 10)]
+                if cell.candidates == []:
+                    [cell.add_candidate(n) for n in range(1, 10)]
 
                 self.check_row_of_cell(row, col, cell)
                 self.check_col_of_cell(row, col, cell)
