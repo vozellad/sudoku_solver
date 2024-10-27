@@ -46,6 +46,7 @@ class Board:
                 [cell.add_candidate(n) for n in range(1, 10)]
 
                 self.check_row_of_cell(row, col, cell)
+                self.check_col_of_cell(row, col, cell)
 
 
     def check_row_of_cell(self, row, col_of_cell, cell):
@@ -56,6 +57,17 @@ class Board:
             curr_num = self.board[row][col].number
             if curr_num is not None:
                 cell.remove_candidate(curr_num)
+
+    def check_col_of_cell(self, row_of_cell, col, cell):
+        for row in range(9):
+            if row == row_of_cell:
+                continue
+
+            curr_num = self.board[row][col].number
+            if curr_num is not None:
+                cell.remove_candidate(curr_num)
+
+
 
 
 def main():
