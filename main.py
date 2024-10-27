@@ -44,29 +44,40 @@ class Board:
                 if cell.candidates == []:
                     [cell.add_candidate(n) for n in range(1, 10)]
 
-                self.check_row_of_cell(row, col, cell)
-                self.check_col_of_cell(row, col, cell)
+                self.check_cell_row(row, col, cell)
+                self.check_cell_col(row, col, cell)
+                self.check_cell_box(row, col, cell)
 
 
-    def check_row_of_cell(self, row, col_of_cell, cell):
+    def check_cell_row(self, row_of_cell, col_of_cell, cell):
         for col in range(9):
             if col == col_of_cell:
                 continue
 
-            curr_num = self.board[row][col].number
+            curr_num = self.board[row_of_cell][col].number
             if curr_num is not None:
                 cell.remove_candidate(curr_num)
 
-    def check_col_of_cell(self, row_of_cell, col, cell):
+    def check_cell_col(self, row_of_cell, col_of_cell, cell):
         for row in range(9):
             if row == row_of_cell:
                 continue
 
-            curr_num = self.board[row][col].number
+            curr_num = self.board[row][col_of_cell].number
             if curr_num is not None:
                 cell.remove_candidate(curr_num)
 
+    def check_cell_box(self, row_of_cell, col_of_cell, cell):
+        row_start = row_of_cell // 3 * 3
+        col_start = col_of_cell // 3 * 3
+        for row in range(row_start, row_start + 3):
+            for col in range(col_start, col_start + 3):
+                if row == row_of_cell and col == col_of_cell:
+                    continue
 
+                curr_num = self.board[row][col].number
+                if curr_num is not None:
+                    cell.remove_candidate(curr_num)
 
 
 def main():
