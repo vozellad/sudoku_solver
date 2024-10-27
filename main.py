@@ -2,6 +2,9 @@
 
 
 def main():
+    """
+    Initializes Sudoku board. Loops through methods to find values until board is completed.
+    """
     init_nums = "  1   5        4    6 8  139       4     3 6 8 7  1    42  76 1   5 2      41   7"
     board = Board(init_nums)
 
