@@ -72,13 +72,13 @@ class Board:
 
 def main():
     board = Board()
-    cells = [
+    init_nums = [
         (0, 2, 1), (0, 6, 5), (1, 6, 4), (2, 2, 6), (2, 4, 8), (2, 7, 1),
         (2, 8, 3), (3, 0, 9), (3, 8, 4), (4, 5, 3), (4, 7, 6), (5, 0, 8),
         (5, 2, 7), (5, 5, 1), (6, 1, 4), (6, 2, 2), (6, 5, 7), (6, 6, 6),
         (6, 8, 1), (7, 3, 5), (7, 5, 2), (8, 3, 4), (8, 4, 1), (8, 8, 7)
     ]
-    for row, col, num in cells:
+    for row, col, num in init_nums:
         board.add_cell_num(row, col, num)
 
     board.output()
