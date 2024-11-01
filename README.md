@@ -1,3 +1,3 @@
 TODO:
-Make module documentation more concise
-Fix warnings in board.py
+<br>Make module documentation more concise
+<br>Fix warnings in board.py
