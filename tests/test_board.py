@@ -173,3 +173,120 @@ def test_find_candidates_full_board():
             cell = board.board[row][col]
             assert cell.candidates == []
 
+
+def test_check_cell_row_empty_row():
+    board = Board(' ' * 81)
+    board.board[0][0].candidates = list(range(1, 10))
+    board.check_cell_row(0, 0, board.board[0][0])
+    assert set(board.board[0][0].candidates) == set(range(1, 10))
+
+
+def test_check_cell_row_with_numbers():
+    init_nums = '12 456 89' + ' ' * 72
+    board = Board(init_nums)
+    board.board[0][2].candidates = list(range(1, 10))
+    board.check_cell_row(0, 2, board.board[0][2])
+    assert set(board.board[0][2].candidates) == {3, 7}
+
+
+def test_check_cell_col_empty_col():
+    board = Board(' ' * 81)
+    board.board[0][0].candidates = list(range(1, 10))
+    board.check_cell_col(0, 0, board.board[0][0])
+    assert set(board.board[0][0].candidates) == set(range(1, 10))
+
+
+def test_check_cell_col_with_numbers():
+    init_nums = f"1{' '*8}2{' '*8}{' '*9}4{' '*8}5{' '*8}6{' '*8}{' '*9}8{' '*8}9{' '*8}"
+    board = Board(init_nums)
+    board.board[2][0].candidates = list(range(1, 10))
+    board.check_cell_col(2, 0, board.board[2][0])
+    assert set(board.board[2][0].candidates) == {3, 7}
+
+
+def test_check_cell_box_empty_box():
+    board = Board(' ' * 81)
+    board.board[1][1].candidates = list(range(1, 10))
+    board.check_cell_box(1, 1, board.board[1][1])
+    assert set(board.board[1][1].candidates) == set(range(1, 10))
+
+
+def test_check_cell_box_with_numbers():
+    init_nums = f"1 3{' '*6}4 6{' '*6}789{' '*60}"
+    board = Board(init_nums)
+    board.board[1][1].candidates = list(range(1, 10))
+    board.check_cell_box(1, 1, board.board[1][1])
+    assert set(board.board[1][1].candidates) == {2, 5}
+
+
+def test_apply_mono_candidates_no_candidates():
+    board = Board(' ' * 81)
+
+    for row in board.board:
+        for cell in row:
+            cell.candidates = []
+
+    board.apply_mono_candidates()
+
+    for row in board.board:
+        for cell in row:
+            assert cell.number is None
+
+
+def test_apply_mono_candidates_with_single_candidate():
+    board = Board(' ' * 81)
+
+    board.board[0][0].candidates = [3]
+    board.board[1][1].candidates = [5]
+    board.board[2][2].candidates = [7]
+
+    board.apply_mono_candidates()
+
+    assert board.board[0][0].number == 3
+    assert board.board[1][1].number == 5
+    assert board.board[2][2].number == 7
+
+    for row in range(9):
+        for col in range(9):
+            if (row, col) not in [(0, 0), (1, 1), (2, 2)]:
+                assert board.board[row][col].number is None
+
+
+def test_apply_mono_candidates_with_multiple_candidates():
+    board = Board(' ' * 81)
+
+    board.board[0][0].candidates = [1, 2, 3]
+    board.board[1][1].candidates = [4, 5, 6]
+    board.board[2][2].candidates = [7, 8, 9]
+
+    board.apply_mono_candidates()
+
+    for row in board.board:
+        for cell in row:
+            assert cell.number is None
+
+
+def test_apply_mono_candidates_mixed():
+    board = Board(' ' * 81)
+
+    board.board[0][0].candidates = [9]
+    board.board[2][2].candidates = [1, 2, 3]
+
+    board.apply_mono_candidates()
+
+    assert board.board[0][0].number == 9
+    assert board.board[2][2].number is None
+
+
+def test_apply_mono_candidates_full_board():
+    board = Board(' ' * 81)
+
+    for row in board.board:
+        for cell in row:
+            cell.candidates = [5]
+
+    board.apply_mono_candidates()
+
+    for row in board.board:
+        for cell in row:
+            assert cell.number == 5
