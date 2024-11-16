@@ -75,9 +75,9 @@ class Board:
                 if curr_num == ' ':
                     self.board[row][col] = Cell()
                 else:
-                    self.board[row][col] = Cell(curr_num)
+                    self.board[row][col] = Cell(int(curr_num))
 
-    def add_cell_num(self, row, col, cell_num):
+    def add_cell_num(self, row, col, cell_num: int):
         """
         Sets a specific cell's number on the board.
 
@@ -122,7 +122,7 @@ class Board:
                 self.check_cell_box(row, col, cell)
 
 
-    def check_cell_row(self, row_of_cell, col_of_cell, cell):
+    def check_cell_row(self, row_of_cell: int, col_of_cell: int, cell: Cell):
         """
         Eliminates candidates for a cell based on numbers found in the same row.
 
@@ -139,7 +139,7 @@ class Board:
             if curr_num is not None:
                 cell.remove_candidate(curr_num)
 
-    def check_cell_col(self, row_of_cell, col_of_cell, cell):
+    def check_cell_col(self, row_of_cell: int, col_of_cell: int, cell: Cell):
         """
         Eliminates candidates for a cell based on numbers found in the same column.
 
@@ -156,7 +156,7 @@ class Board:
             if curr_num is not None:
                 cell.remove_candidate(curr_num)
 
-    def check_cell_box(self, row_of_cell, col_of_cell, cell):
+    def check_cell_box(self, row_of_cell: int, col_of_cell: int, cell: Cell):
         """
         Eliminates candidates for a cell based on numbers
         found in the 3x3 subgrid containing the cell.
