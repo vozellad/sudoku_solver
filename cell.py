@@ -49,7 +49,7 @@ class Cell:
         candidates (list of int): Potential numbers that could be valid for this cell.
     """
 
-    def __init__(self, number=None):
+    def __init__(self, number: int=None):
         """
         Initializes a cell with an optional number. If the cell is empty,
         it initializes an empty list for candidates.
@@ -58,9 +58,9 @@ class Cell:
             number (int or None): The initial number for the cell, or None if the cell is empty.
         """
         self.number = number
-        self.candidates = []
+        self.candidates = []  # TODO: change to set
 
-    def add_candidate(self, new_candidate):
+    def add_candidate(self, new_candidate: int):
         """
         Adds a candidate number to the cell if it's not already in the list.
 
@@ -72,7 +72,7 @@ class Cell:
         else:
             print(f'Candidate {new_candidate} already in list.')
 
-    def remove_candidate(self, candidate):
+    def remove_candidate(self, candidate: int):
         """
         Removes a candidate number from the cell if it exists in the list.
 
