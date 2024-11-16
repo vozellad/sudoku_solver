@@ -57,7 +57,7 @@ class Cell:
         Args:
             number (int or None): The initial number for the cell, or None if the cell is empty.
         """
-        self.number = number
+        self.number = number  # TODO: add_number() that removes candidates
         self.candidates = []  # TODO: change to set
 
     def add_candidate(self, new_candidate: int):
@@ -67,7 +67,9 @@ class Cell:
         Args:
             new_candidate (int): A candidate number to add to the cell.
         """
-        if new_candidate not in self.candidates:
+        if self.number:  # TODO: document this addition
+            print('Cell already has number.')
+        elif new_candidate not in self.candidates:
             self.candidates.append(new_candidate)
         else:
             print(f'Candidate {new_candidate} already in list.')
@@ -79,5 +81,8 @@ class Cell:
         Args:
             candidate (int): The candidate number to remove.
         """
-        if candidate in self.candidates:
+
+        if self.number:  # TODO: document this addition
+            print('Cell already has number.')
+        elif candidate in self.candidates:
             self.candidates.remove(candidate)
