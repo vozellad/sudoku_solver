@@ -181,7 +181,7 @@ class Board:
         """
         Sets the cell's number if it has exactly one candidate, thus determining its final value.
         """
-        for b in self.board:
-            for cell in b:
+        for row in self.board:
+            for cell in row:
                 if cell.number is None and len(cell.candidates) == 1:
                     cell.number = cell.candidates[0]
