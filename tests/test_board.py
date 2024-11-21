@@ -25,7 +25,9 @@ def test_board_initialization():
 def test_board_invalid_init_length():
     # Test ValueError for input not 81 characters long
     with pytest.raises(ValueError):
-        Board("123")  # Shorter string should raise ValueError
+        Board("123")  # too short
+    with pytest.raises(ValueError):
+        Board("1"*82)  # too long
 
 
 def test_board_empty_cells():
